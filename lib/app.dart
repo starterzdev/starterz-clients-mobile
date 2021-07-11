@@ -1,9 +1,14 @@
-class App extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:starterz/config/route_generator.dart';
+import 'package:starterz/screen/auth/page/auth_page.dart';
+
+class App extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Starterz',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

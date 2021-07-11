@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>starters</string>
+	<string>starterz</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -41,5 +41,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<!-- common -->
+		<string>kakao73d19306c0fb4b4a496c0377eac5768a</string>
+
+		<!-- KakaoTalk login -->
+		<string>kakaokompassauth</string>
+		<string>storykompassauth</string>
+
+		<!-- KakaoLink -->
+		<string>kakaolink</string>         
+		<string>kakaotalk-5.9.7</string>
+	</array>
 </dict>
 </plist>

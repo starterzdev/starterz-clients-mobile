@@ -1,4 +1,4 @@
-# starters
+# starterz
 
 A new Flutter project.
 
