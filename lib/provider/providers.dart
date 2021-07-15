@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:starterz/provider/auth/auth_notifier.dart';
 import 'package:starterz/provider/auth/auth_state.dart';
+import 'package:starterz/provider/bottom_navigation/bottom_navigation_notifier.dart';
+import 'package:starterz/provider/bottom_navigation/bottom_navigation_state.dart';
 
 final backendClientProvider = FutureProvider<Dio>((ref) async {
   const baseUrl = "http://192.168.2.16:8080/api/v1/";
@@ -28,3 +30,7 @@ final backendClientProvider = FutureProvider<Dio>((ref) async {
 
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>(
     (ref) => AuthNotifier(ref.read, AuthState.notAuthenticated()));
+
+final bottomNavigationProvider =
+    StateNotifierProvider<BottomNavigationNotifier, BottomNavigationState>(
+        (ref) => BottomNavigationNotifier(BottomNavigationState.myProject()));

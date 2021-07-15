@@ -32,6 +32,13 @@ class MainPage extends ConsumerWidget {
             ),
           ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: ref.watch(bottomNavigationProvider).when(
+              myProject: () => 0,
+              recruiting: () => 1,
+              settings: () => 2,
+            ),
+        onTap: (value) =>
+            ref.read(bottomNavigationProvider.notifier).switchTab(value),
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.laptop_mac),
