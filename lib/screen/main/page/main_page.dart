@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:starterz/provider/providers.dart';
+import 'package:starterz/screen/my_project/my_project_dashboard.dart';
+import 'package:starterz/screen/recruiting/recruiting_dashboard.dart';
+import 'package:starterz/screen/settings/settings_dashboard.dart';
 
 class MainPage extends ConsumerWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -18,18 +21,11 @@ class MainPage extends ConsumerWidget {
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil('auth', (route) => false));
             },
-            orElse: () => Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: ref.watch(authProvider.notifier).logoutFromKakao,
-                    child: Text('Logout'),
-                  ),
-                ],
-              ),
-            ),
+            orElse: () => ref.watch(bottomNavigationProvider).when(
+                  myProject: () => MyProjectDashboard(),
+                  recruiting: () => RecruitingDashboard(),
+                  settings: () => SettingsDashboard(),
+                ),
           ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: ref.watch(bottomNavigationProvider).when(
