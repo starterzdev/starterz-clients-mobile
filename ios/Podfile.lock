@@ -1,22 +1,6 @@
 PODS:
-  - AppAuth (1.4.0):
-    - AppAuth/Core (= 1.4.0)
-    - AppAuth/ExternalUserAgent (= 1.4.0)
-  - AppAuth/Core (1.4.0)
-  - AppAuth/ExternalUserAgent (1.4.0)
   - Flutter (1.0.0)
-  - google_sign_in (0.0.1):
-    - Flutter
-    - GoogleSignIn (~> 5.0)
-  - GoogleSignIn (5.0.2):
-    - AppAuth (~> 1.2)
-    - GTMAppAuth (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - GTMAppAuth (1.2.2):
-    - AppAuth/Core (~> 1.4)
-    - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.6.1)
-  - kakao_flutter_sdk (0.6.4):
+  - kakao_flutter_sdk (0.7.0):
     - Flutter
   - package_info (0.0.1):
     - Flutter
@@ -25,23 +9,13 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - kakao_flutter_sdk (from `.symlinks/plugins/kakao_flutter_sdk/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
-SPEC REPOS:
-  trunk:
-    - AppAuth
-    - GoogleSignIn
-    - GTMAppAuth
-    - GTMSessionFetcher
-
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  google_sign_in:
-    :path: ".symlinks/plugins/google_sign_in/ios"
   kakao_flutter_sdk:
     :path: ".symlinks/plugins/kakao_flutter_sdk/ios"
   package_info:
@@ -50,13 +24,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
-  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  google_sign_in: 6bd214b9c154f881422f5fe27b66aaa7bbd580cc
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
-  GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
-  GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
-  kakao_flutter_sdk: 90f18c09513cfaaa6af63214617ceb696878fc09
+  kakao_flutter_sdk: e9ce9223c809eba9a9c375fb134ca608400ca9a1
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
 

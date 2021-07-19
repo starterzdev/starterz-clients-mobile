@@ -6,30 +6,64 @@ import 'package:starterz/provider/auth/auth_notifier.dart';
 import 'package:starterz/provider/auth/auth_state.dart';
 import 'package:starterz/provider/bottom_navigation/bottom_navigation_notifier.dart';
 import 'package:starterz/provider/bottom_navigation/bottom_navigation_state.dart';
+import 'package:starterz/utils/backend_client_provider.dart';
 
-final backendClientProvider = FutureProvider<Dio>((ref) async {
-  const baseUrl = "http://192.168.2.16:8080/api/v1/";
-  final dio = Dio(BaseOptions(
-    baseUrl: baseUrl,
-    connectTimeout: 5000,
-    receiveTimeout: 5000,
-  ));
+final backendClientProvider = Provider<Dio>((ref) {
+  final dio = BackendClientProvider.generateDefaultDio();
   dio.interceptors.addAll([
-    LogInterceptor(
-      responseBody: true,
-    ),
+    InterceptorsWrapper(onRequest: (options, handler) {
+      ref.read(authProvider).maybeWhen(
+          authenticated: (token) {
+            options.headers['Authorization'] = "Bearer $token";
+            handler.next(options);
+          },
+          orElse: () => handler.next(options));
+    }, onError: (e, handler) async {
+      if (e.response?.statusCode == 401 &&
+          !e.requestOptions.path.startsWith('api/v1/auth')) {
+        dio.lock();
+        await ref.read(authProvider.notifier).refreshKakaoToken();
+        ref.read(authProvider).maybeWhen(
+          authenticated: (token) async {
+            RequestOptions request = e.response!.requestOptions;
+            request.headers["Authorization"] = "Bearer $token";
+            dio.unlock();
+            var response = await dio.request(
+              request.path,
+              data: request.data,
+              options: Options(
+                method: request.method,
+                headers: request.headers,
+                contentType: request.contentType,
+              ),
+            );
+
+            return handler.resolve(response);
+          },
+          orElse: () {
+            dio.unlock();
+            return handler.reject(e);
+          },
+        );
+      }
+    })
   ]);
-  try {
-    await dio.get("actuator/health");
-    Timer.periodic(Duration(minutes: 1), (timer) => dio.get("actuator/health"));
-  } on DioError {
+  dio
+      .get("actuator/health")
+      .then((value) => Timer.periodic(
+          Duration(minutes: 1), (timer) => dio.get("actuator/health")))
+      .catchError((e) {
     print('Health Check failed...');
-  }
+  });
   return dio;
 });
 
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>(
-    (ref) => AuthNotifier(ref.read, AuthState.notAuthenticated()));
+final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
+  return AuthNotifier(
+    BackendClientProvider.generateDefaultDio(),
+    AuthState.loading(),
+  );
+});
 
 final bottomNavigationProvider =
     StateNotifierProvider<BottomNavigationNotifier, BottomNavigationState>(
