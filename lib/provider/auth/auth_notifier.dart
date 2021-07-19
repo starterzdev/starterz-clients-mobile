@@ -1,11 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:starterz/provider/auth/auth_state.dart';
+import 'package:starterz/provider/auth/domain/auth_response.dart';
 
 class AuthNotifier extends StateNotifier<AuthState> {
-  final Reader read;
+  final Dio _dio;
 
-  AuthNotifier(this.read, AuthState state) : super(state) {
+  AuthNotifier(this._dio, AuthState state) : super(state) {
     refreshKakaoToken();
   }
 
@@ -14,9 +16,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = AuthState.loading();
 
     try {
-      final User user = await UserApi.instance.me();
-      print("Refreshed Kakao User: $user");
-      state = AuthState.authenticated();
+      final AccessTokenInfo accessTokenInfo =
+          await UserApi.instance.accessTokenInfo();
+      print("Refreshed Kakao User: ${accessTokenInfo.id}");
+      final OAuthToken token = await AccessTokenStore.instance.fromStore();
+      var response = await _dio.post('auth', data: {
+        "authType": 'KAKAO',
+        "token": token.accessToken,
+      });
+      final AuthResponse authResponse = AuthResponse.fromJson(response.data);
+      state = AuthState.authenticated(authResponse.token);
     } catch (e) {
       state = AuthState.notAuthenticated();
     }
@@ -30,7 +39,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
       isKakaoInstalled
           ? await UserApi.instance.loginWithKakaoTalk()
           : await UserApi.instance.loginWithKakaoAccount();
-      state = AuthState.authenticated();
+      final OAuthToken token = await AccessTokenStore.instance.fromStore();
+      var response = await _dio.post('auth', data: {
+        "authType": 'KAKAO',
+        "token": token.accessToken,
+      });
+      final AuthResponse authResponse = AuthResponse.fromJson(response.data);
+      state = AuthState.authenticated(authResponse.token);
     } catch (e) {
       state = AuthState.notAuthenticated();
       print(e);

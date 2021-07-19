@@ -7,14 +7,13 @@ import 'package:starterz/screen/auth/page/auth_page.dart';
 class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref
-        .read(backendClientProvider)
-        .whenData((value) => print('BackendClient initialized...'));
+    ref.read(backendClientProvider);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Starterz',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        backgroundColor: const Color(0xFFE6A896),
+        primaryColor: const Color(0xFFE6A896),
       ),
       onGenerateRoute: RouteGenerator.generateRoute,
       home: AuthPage(),

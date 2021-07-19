@@ -20,8 +20,10 @@ class _$AuthStateTearOff {
     return const _AuthStateLoading();
   }
 
-  _AuthStateAuthenticated authenticated() {
-    return const _AuthStateAuthenticated();
+  _AuthStateAuthenticated authenticated(String token) {
+    return _AuthStateAuthenticated(
+      token,
+    );
   }
 
   _AuthStateNotAuthenticated notAuthenticated() {
@@ -43,7 +45,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function(String? error) error,
   }) =>
@@ -51,7 +53,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -133,7 +135,7 @@ class _$_AuthStateLoading implements _AuthStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function(String? error) error,
   }) {
@@ -144,7 +146,7 @@ class _$_AuthStateLoading implements _AuthStateLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -192,6 +194,7 @@ abstract class _$AuthStateAuthenticatedCopyWith<$Res> {
   factory _$AuthStateAuthenticatedCopyWith(_AuthStateAuthenticated value,
           $Res Function(_AuthStateAuthenticated) then) =
       __$AuthStateAuthenticatedCopyWithImpl<$Res>;
+  $Res call({String token});
 }
 
 /// @nodoc
@@ -204,48 +207,73 @@ class __$AuthStateAuthenticatedCopyWithImpl<$Res>
 
   @override
   _AuthStateAuthenticated get _value => super._value as _AuthStateAuthenticated;
+
+  @override
+  $Res call({
+    Object? token = freezed,
+  }) {
+    return _then(_AuthStateAuthenticated(
+      token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
-  const _$_AuthStateAuthenticated();
+  const _$_AuthStateAuthenticated(this.token);
+
+  @override
+  final String token;
 
   @override
   String toString() {
-    return 'AuthState.authenticated()';
+    return 'AuthState.authenticated(token: $token)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _AuthStateAuthenticated);
+    return identical(this, other) ||
+        (other is _AuthStateAuthenticated &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(token);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AuthStateAuthenticatedCopyWith<_AuthStateAuthenticated> get copyWith =>
+      __$AuthStateAuthenticatedCopyWithImpl<_AuthStateAuthenticated>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function(String? error) error,
   }) {
-    return authenticated();
+    return authenticated(token);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated();
+      return authenticated(token);
     }
     return orElse();
   }
@@ -279,7 +307,13 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
 }
 
 abstract class _AuthStateAuthenticated implements AuthState {
-  const factory _AuthStateAuthenticated() = _$_AuthStateAuthenticated;
+  const factory _AuthStateAuthenticated(String token) =
+      _$_AuthStateAuthenticated;
+
+  String get token => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$AuthStateAuthenticatedCopyWith<_AuthStateAuthenticated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -324,7 +358,7 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function(String? error) error,
   }) {
@@ -335,7 +369,7 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -443,7 +477,7 @@ class _$_AuthStateError implements _AuthStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function(String? error) error,
   }) {
@@ -454,7 +488,7 @@ class _$_AuthStateError implements _AuthStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function(String? error)? error,
     required TResult orElse(),
