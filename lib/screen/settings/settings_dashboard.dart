@@ -8,15 +8,16 @@ class SettingsDashboard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TextButton(
-            onPressed: ref.read(authProvider.notifier).logoutFromKakao,
-            child: Text('logout'),
-          )
-        ],
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: ref.read(authProvider.notifier).logoutFromKakao,
+              child: Text('logout'),
+            )
+          ],
+        ),
       ),
     );
   }

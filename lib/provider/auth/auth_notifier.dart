@@ -12,20 +12,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   Future<void> refreshKakaoToken() async {
-    print('Refreshing Kakao token...');
-    state = AuthState.loading();
-
     try {
-      final AccessTokenInfo accessTokenInfo =
-          await UserApi.instance.accessTokenInfo();
-      print("Refreshed Kakao User: ${accessTokenInfo.id}");
+      print('Refreshing Kakao token...');
+      state = AuthState.loading();
       final OAuthToken token = await AccessTokenStore.instance.fromStore();
-      var response = await _dio.post('auth', data: {
-        "authType": 'KAKAO',
-        "token": token.accessToken,
-      });
-      final AuthResponse authResponse = AuthResponse.fromJson(response.data);
-      state = AuthState.authenticated(authResponse.token);
+      print("Verifying Kakao access token... ${token.accessToken}");
+      await _authenticateBackend(token.accessToken!);
     } catch (e) {
       state = AuthState.notAuthenticated();
     }
@@ -40,12 +32,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
           ? await UserApi.instance.loginWithKakaoTalk()
           : await UserApi.instance.loginWithKakaoAccount();
       final OAuthToken token = await AccessTokenStore.instance.fromStore();
-      var response = await _dio.post('auth', data: {
-        "authType": 'KAKAO',
-        "token": token.accessToken,
-      });
-      final AuthResponse authResponse = AuthResponse.fromJson(response.data);
-      state = AuthState.authenticated(authResponse.token);
+      _authenticateBackend(token.accessToken!);
     } catch (e) {
       state = AuthState.notAuthenticated();
       print(e);
@@ -56,5 +43,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = AuthState.loading();
     await UserApi.instance.logout();
     state = AuthState.notAuthenticated();
+  }
+
+  Future<void> _authenticateBackend(String accessToken) async {
+    var response = await _dio.post('auth', data: {
+      "authType": 'KAKAO',
+      "token": accessToken,
+    });
+    final AuthResponse authResponse = AuthResponse.fromJson(response.data);
+    state = AuthState.authenticated(authResponse.token);
   }
 }
