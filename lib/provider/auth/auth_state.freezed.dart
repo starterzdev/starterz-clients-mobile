@@ -30,6 +30,10 @@ class _$AuthStateTearOff {
     return const _AuthStateNotAuthenticated();
   }
 
+  _AuthStateRegistrationRequired registrationRequired() {
+    return const _AuthStateRegistrationRequired();
+  }
+
   _AuthStateError error([String? error]) {
     return _AuthStateError(
       error,
@@ -47,6 +51,7 @@ mixin _$AuthState {
     required TResult Function() loading,
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
+    required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +60,7 @@ mixin _$AuthState {
     TResult Function()? loading,
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
+    TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) =>
@@ -65,6 +71,8 @@ mixin _$AuthState {
     required TResult Function(_AuthStateAuthenticated value) authenticated,
     required TResult Function(_AuthStateNotAuthenticated value)
         notAuthenticated,
+    required TResult Function(_AuthStateRegistrationRequired value)
+        registrationRequired,
     required TResult Function(_AuthStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -73,6 +81,8 @@ mixin _$AuthState {
     TResult Function(_AuthStateLoading value)? loading,
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
+    TResult Function(_AuthStateRegistrationRequired value)?
+        registrationRequired,
     TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) =>
@@ -137,6 +147,7 @@ class _$_AuthStateLoading implements _AuthStateLoading {
     required TResult Function() loading,
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
+    required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
     return loading();
@@ -148,6 +159,7 @@ class _$_AuthStateLoading implements _AuthStateLoading {
     TResult Function()? loading,
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
+    TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -164,6 +176,8 @@ class _$_AuthStateLoading implements _AuthStateLoading {
     required TResult Function(_AuthStateAuthenticated value) authenticated,
     required TResult Function(_AuthStateNotAuthenticated value)
         notAuthenticated,
+    required TResult Function(_AuthStateRegistrationRequired value)
+        registrationRequired,
     required TResult Function(_AuthStateError value) error,
   }) {
     return loading(this);
@@ -175,6 +189,8 @@ class _$_AuthStateLoading implements _AuthStateLoading {
     TResult Function(_AuthStateLoading value)? loading,
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
+    TResult Function(_AuthStateRegistrationRequired value)?
+        registrationRequired,
     TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) {
@@ -258,6 +274,7 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
     required TResult Function() loading,
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
+    required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
     return authenticated(token);
@@ -269,6 +286,7 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
     TResult Function()? loading,
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
+    TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -285,6 +303,8 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
     required TResult Function(_AuthStateAuthenticated value) authenticated,
     required TResult Function(_AuthStateNotAuthenticated value)
         notAuthenticated,
+    required TResult Function(_AuthStateRegistrationRequired value)
+        registrationRequired,
     required TResult Function(_AuthStateError value) error,
   }) {
     return authenticated(this);
@@ -296,6 +316,8 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
     TResult Function(_AuthStateLoading value)? loading,
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
+    TResult Function(_AuthStateRegistrationRequired value)?
+        registrationRequired,
     TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) {
@@ -360,6 +382,7 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
     required TResult Function() loading,
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
+    required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
     return notAuthenticated();
@@ -371,6 +394,7 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
     TResult Function()? loading,
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
+    TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -387,6 +411,8 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
     required TResult Function(_AuthStateAuthenticated value) authenticated,
     required TResult Function(_AuthStateNotAuthenticated value)
         notAuthenticated,
+    required TResult Function(_AuthStateRegistrationRequired value)
+        registrationRequired,
     required TResult Function(_AuthStateError value) error,
   }) {
     return notAuthenticated(this);
@@ -398,6 +424,8 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
     TResult Function(_AuthStateLoading value)? loading,
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
+    TResult Function(_AuthStateRegistrationRequired value)?
+        registrationRequired,
     TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) {
@@ -410,6 +438,112 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
 
 abstract class _AuthStateNotAuthenticated implements AuthState {
   const factory _AuthStateNotAuthenticated() = _$_AuthStateNotAuthenticated;
+}
+
+/// @nodoc
+abstract class _$AuthStateRegistrationRequiredCopyWith<$Res> {
+  factory _$AuthStateRegistrationRequiredCopyWith(
+          _AuthStateRegistrationRequired value,
+          $Res Function(_AuthStateRegistrationRequired) then) =
+      __$AuthStateRegistrationRequiredCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$AuthStateRegistrationRequiredCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res>
+    implements _$AuthStateRegistrationRequiredCopyWith<$Res> {
+  __$AuthStateRegistrationRequiredCopyWithImpl(
+      _AuthStateRegistrationRequired _value,
+      $Res Function(_AuthStateRegistrationRequired) _then)
+      : super(_value, (v) => _then(v as _AuthStateRegistrationRequired));
+
+  @override
+  _AuthStateRegistrationRequired get _value =>
+      super._value as _AuthStateRegistrationRequired;
+}
+
+/// @nodoc
+
+class _$_AuthStateRegistrationRequired
+    implements _AuthStateRegistrationRequired {
+  const _$_AuthStateRegistrationRequired();
+
+  @override
+  String toString() {
+    return 'AuthState.registrationRequired()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _AuthStateRegistrationRequired);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String token) authenticated,
+    required TResult Function() notAuthenticated,
+    required TResult Function() registrationRequired,
+    required TResult Function(String? error) error,
+  }) {
+    return registrationRequired();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String token)? authenticated,
+    TResult Function()? notAuthenticated,
+    TResult Function()? registrationRequired,
+    TResult Function(String? error)? error,
+    required TResult orElse(),
+  }) {
+    if (registrationRequired != null) {
+      return registrationRequired();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthStateLoading value) loading,
+    required TResult Function(_AuthStateAuthenticated value) authenticated,
+    required TResult Function(_AuthStateNotAuthenticated value)
+        notAuthenticated,
+    required TResult Function(_AuthStateRegistrationRequired value)
+        registrationRequired,
+    required TResult Function(_AuthStateError value) error,
+  }) {
+    return registrationRequired(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthStateLoading value)? loading,
+    TResult Function(_AuthStateAuthenticated value)? authenticated,
+    TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
+    TResult Function(_AuthStateRegistrationRequired value)?
+        registrationRequired,
+    TResult Function(_AuthStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (registrationRequired != null) {
+      return registrationRequired(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthStateRegistrationRequired implements AuthState {
+  const factory _AuthStateRegistrationRequired() =
+      _$_AuthStateRegistrationRequired;
 }
 
 /// @nodoc
@@ -479,6 +613,7 @@ class _$_AuthStateError implements _AuthStateError {
     required TResult Function() loading,
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
+    required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
     return error(this.error);
@@ -490,6 +625,7 @@ class _$_AuthStateError implements _AuthStateError {
     TResult Function()? loading,
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
+    TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -506,6 +642,8 @@ class _$_AuthStateError implements _AuthStateError {
     required TResult Function(_AuthStateAuthenticated value) authenticated,
     required TResult Function(_AuthStateNotAuthenticated value)
         notAuthenticated,
+    required TResult Function(_AuthStateRegistrationRequired value)
+        registrationRequired,
     required TResult Function(_AuthStateError value) error,
   }) {
     return error(this);
@@ -517,6 +655,8 @@ class _$_AuthStateError implements _AuthStateError {
     TResult Function(_AuthStateLoading value)? loading,
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
+    TResult Function(_AuthStateRegistrationRequired value)?
+        registrationRequired,
     TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) {

@@ -16,6 +16,11 @@ class MainPage extends ConsumerWidget {
         title: Text('Title'),
       ),
       body: ref.watch(authProvider).maybeWhen(
+            loading: () {
+              SchedulerBinding.instance!.addPostFrameCallback((timeStamp) =>
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil('auth', (route) => false));
+            },
             notAuthenticated: () {
               SchedulerBinding.instance!.addPostFrameCallback((timeStamp) =>
                   Navigator.of(context)

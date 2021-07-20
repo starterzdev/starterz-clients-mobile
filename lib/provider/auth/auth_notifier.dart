@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:starterz/provider/auth/auth_state.dart';
+import 'package:starterz/provider/auth/domain/auth_request.dart';
 import 'package:starterz/provider/auth/domain/auth_response.dart';
+import 'package:starterz/provider/auth/domain/integrate_request.dart';
 
 class AuthNotifier extends StateNotifier<AuthState> {
   final Dio _dio;
@@ -32,7 +36,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
           ? await UserApi.instance.loginWithKakaoTalk()
           : await UserApi.instance.loginWithKakaoAccount();
       final OAuthToken token = await AccessTokenStore.instance.fromStore();
-      _authenticateBackend(token.accessToken!);
+      await _authenticateBackend(token.accessToken!);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == HttpStatus.notFound) {
+        state = AuthState.registrationRequired();
+      } else {
+        state = AuthState.notAuthenticated();
+      }
+      print(e);
     } catch (e) {
       state = AuthState.notAuthenticated();
       print(e);
@@ -46,11 +57,34 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   Future<void> _authenticateBackend(String accessToken) async {
-    var response = await _dio.post('auth', data: {
-      "authType": 'KAKAO',
-      "token": accessToken,
-    });
+    var response = await _dio.post(
+      'auth',
+      data: AuthRequest(
+        authType: AuthType.KAKAO,
+        oAuthToken: accessToken,
+      ).toJson(),
+    );
     final AuthResponse authResponse = AuthResponse.fromJson(response.data);
     state = AuthState.authenticated(authResponse.token);
+  }
+
+  Future<void> integrate(String email) async {
+    try {
+      state = AuthState.loading();
+      final OAuthToken token = await AccessTokenStore.instance.fromStore();
+      var response = await _dio.post(
+        'auth/integrate',
+        data: IntegrateRequest(
+          email: email,
+          authType: AuthType.KAKAO,
+          oAuthToken: token.accessToken!,
+        ).toJson(),
+      );
+      final AuthResponse authResponse = AuthResponse.fromJson(response.data);
+      state = AuthState.authenticated(authResponse.token);
+    } catch (e) {
+      print(e);
+      state = AuthState.notAuthenticated();
+    }
   }
 }
