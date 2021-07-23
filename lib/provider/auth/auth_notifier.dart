@@ -39,7 +39,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       await _authenticateBackend(token.accessToken!);
     } on DioError catch (e) {
       if (e.response?.statusCode == HttpStatus.notFound) {
-        state = AuthState.registrationRequired();
+        state = AuthState.integrationRequired();
       } else {
         state = AuthState.notAuthenticated();
       }
@@ -82,9 +82,19 @@ class AuthNotifier extends StateNotifier<AuthState> {
       );
       final AuthResponse authResponse = AuthResponse.fromJson(response.data);
       state = AuthState.authenticated(authResponse.token);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == HttpStatus.notFound) {
+        state = AuthState.registrationRequired();
+      } else {
+        state = AuthState.notAuthenticated();
+      }
     } catch (e) {
       print(e);
       state = AuthState.notAuthenticated();
     }
+  }
+
+  void cancelAuthenticating() {
+    state = AuthState.notAuthenticated();
   }
 }

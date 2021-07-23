@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:starterz/provider/providers.dart';
+import 'package:starterz/screen/auth/sheet/integration_sheet.dart';
 
 class AuthPage extends ConsumerWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class AuthPage extends ConsumerWidget {
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil('main', (route) => false));
             },
-            registrationRequired: () {
+            integrationRequired: () {
               SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
                 showModalBottomSheet(
                   shape: RoundedRectangleBorder(
@@ -25,51 +26,13 @@ class AuthPage extends ConsumerWidget {
                   isScrollControlled: true,
                   context: context,
                   builder: (BuildContext context) {
-                    TextEditingController emailController =
-                        TextEditingController();
-                    return Wrap(
-                      children: [
-                        Container(
-                            padding: MediaQuery.of(context).viewInsets,
-                            child: Container(
-                              padding: EdgeInsets.fromLTRB(20, 30, 20, 40),
-                              child: Column(
-                                children: [
-                                  TextField(
-                                    controller: emailController,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: "이메일 주소",
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        ref
-                                            .read(authProvider.notifier)
-                                            .integrate(emailController.text);
-                                      },
-                                      style: ButtonStyle(),
-                                      child: Text(
-                                        '연동하기',
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )),
-                      ],
-                    );
+                    return IntegrationSheet();
                   },
                 );
               });
               return buildAuthenticationView(ref);
             },
+            registrationRequired: () => buildAuthenticationView(ref),
             loading: () => Container(
               child: Center(
                 child: Column(
