@@ -16,21 +16,16 @@ class MainPage extends ConsumerWidget {
         title: Text('Title'),
       ),
       body: ref.watch(authProvider).maybeWhen(
-            loading: () {
-              SchedulerBinding.instance!.addPostFrameCallback((timeStamp) =>
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('auth', (route) => false));
-            },
-            notAuthenticated: () {
-              SchedulerBinding.instance!.addPostFrameCallback((timeStamp) =>
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('auth', (route) => false));
-            },
-            orElse: () => ref.watch(bottomNavigationProvider).when(
+            authenticated: (token) => ref.watch(bottomNavigationProvider).when(
                   myProject: () => MyProjectDashboard(),
                   recruiting: () => RecruitingDashboard(),
                   settings: () => SettingsDashboard(),
                 ),
+            orElse: () {
+              SchedulerBinding.instance!.addPostFrameCallback((timeStamp) =>
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil('auth', (route) => false));
+            },
           ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: ref.watch(bottomNavigationProvider).when(

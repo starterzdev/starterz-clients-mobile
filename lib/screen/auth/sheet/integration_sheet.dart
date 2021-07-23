@@ -17,6 +17,7 @@ class IntegrationSheet extends ConsumerWidget {
                 child: Column(
                   children: [
                     TextField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: emailController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),

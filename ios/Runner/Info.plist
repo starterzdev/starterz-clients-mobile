@@ -18,8 +18,27 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao73d19306c0fb4b4a496c0377eac5768a</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakao73d19306c0fb4b4a496c0377eac5768a</string>
+		<string>kakaokompassauth</string>
+		<string>storykompassauth</string>
+		<string>kakaolink</string>
+		<string>kakaotalk-5.9.7</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -41,18 +60,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<!-- common -->
-		<string>kakao73d19306c0fb4b4a496c0377eac5768a</string>
-
-		<!-- KakaoTalk login -->
-		<string>kakaokompassauth</string>
-		<string>storykompassauth</string>
-
-		<!-- KakaoLink -->
-		<string>kakaolink</string>         
-		<string>kakaotalk-5.9.7</string>
-	</array>
 </dict>
 </plist>
