@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:starterz/provider/providers.dart';
 import 'package:starterz/screen/auth/sheet/integration_sheet.dart';
+import 'package:starterz/screen/auth/view/login_view.dart';
 
 class AuthPage extends ConsumerWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class AuthPage extends ConsumerWidget {
             integrationRequired: () {
               SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
                 showModalBottomSheet(
+                  isDismissible: false,
                   shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(25.0))),
@@ -30,9 +32,8 @@ class AuthPage extends ConsumerWidget {
                   },
                 );
               });
-              return buildAuthenticationView(ref);
+              return LoginView();
             },
-            registrationRequired: () => buildAuthenticationView(ref),
             loading: () => Container(
               child: Center(
                 child: Column(
@@ -44,30 +45,8 @@ class AuthPage extends ConsumerWidget {
                 ),
               ),
             ),
-            orElse: () => buildAuthenticationView(ref),
+            orElse: () => LoginView(),
           ),
-    );
-  }
-
-  buildAuthenticationView(WidgetRef ref) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: 40,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TextButton(
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-            ),
-            onPressed: ref.read(authProvider.notifier).loginWithKakao,
-            child: Image.asset('assets/images/kakao_login_wide.png'),
-          ),
-        ],
-      ),
     );
   }
 }

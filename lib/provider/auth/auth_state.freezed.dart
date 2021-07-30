@@ -34,6 +34,10 @@ class _$AuthStateTearOff {
     return const _AuthStateIntegrationRequired();
   }
 
+  _AuthStateVerificationRequired verificationRequired() {
+    return const _AuthStateVerificationRequired();
+  }
+
   _AuthStateRegistrationRequired registrationRequired() {
     return const _AuthStateRegistrationRequired();
   }
@@ -56,6 +60,7 @@ mixin _$AuthState {
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function() integrationRequired,
+    required TResult Function() verificationRequired,
     required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) =>
@@ -66,6 +71,7 @@ mixin _$AuthState {
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function()? integrationRequired,
+    TResult Function()? verificationRequired,
     TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -79,6 +85,8 @@ mixin _$AuthState {
         notAuthenticated,
     required TResult Function(_AuthStateIntegrationRequired value)
         integrationRequired,
+    required TResult Function(_AuthStateVerificationRequired value)
+        verificationRequired,
     required TResult Function(_AuthStateRegistrationRequired value)
         registrationRequired,
     required TResult Function(_AuthStateError value) error,
@@ -90,6 +98,8 @@ mixin _$AuthState {
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
     TResult Function(_AuthStateIntegrationRequired value)? integrationRequired,
+    TResult Function(_AuthStateVerificationRequired value)?
+        verificationRequired,
     TResult Function(_AuthStateRegistrationRequired value)?
         registrationRequired,
     TResult Function(_AuthStateError value)? error,
@@ -157,6 +167,7 @@ class _$_AuthStateLoading implements _AuthStateLoading {
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function() integrationRequired,
+    required TResult Function() verificationRequired,
     required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
@@ -170,6 +181,7 @@ class _$_AuthStateLoading implements _AuthStateLoading {
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function()? integrationRequired,
+    TResult Function()? verificationRequired,
     TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -189,6 +201,8 @@ class _$_AuthStateLoading implements _AuthStateLoading {
         notAuthenticated,
     required TResult Function(_AuthStateIntegrationRequired value)
         integrationRequired,
+    required TResult Function(_AuthStateVerificationRequired value)
+        verificationRequired,
     required TResult Function(_AuthStateRegistrationRequired value)
         registrationRequired,
     required TResult Function(_AuthStateError value) error,
@@ -203,6 +217,8 @@ class _$_AuthStateLoading implements _AuthStateLoading {
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
     TResult Function(_AuthStateIntegrationRequired value)? integrationRequired,
+    TResult Function(_AuthStateVerificationRequired value)?
+        verificationRequired,
     TResult Function(_AuthStateRegistrationRequired value)?
         registrationRequired,
     TResult Function(_AuthStateError value)? error,
@@ -289,6 +305,7 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function() integrationRequired,
+    required TResult Function() verificationRequired,
     required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
@@ -302,6 +319,7 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function()? integrationRequired,
+    TResult Function()? verificationRequired,
     TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -321,6 +339,8 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
         notAuthenticated,
     required TResult Function(_AuthStateIntegrationRequired value)
         integrationRequired,
+    required TResult Function(_AuthStateVerificationRequired value)
+        verificationRequired,
     required TResult Function(_AuthStateRegistrationRequired value)
         registrationRequired,
     required TResult Function(_AuthStateError value) error,
@@ -335,6 +355,8 @@ class _$_AuthStateAuthenticated implements _AuthStateAuthenticated {
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
     TResult Function(_AuthStateIntegrationRequired value)? integrationRequired,
+    TResult Function(_AuthStateVerificationRequired value)?
+        verificationRequired,
     TResult Function(_AuthStateRegistrationRequired value)?
         registrationRequired,
     TResult Function(_AuthStateError value)? error,
@@ -402,6 +424,7 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function() integrationRequired,
+    required TResult Function() verificationRequired,
     required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
@@ -415,6 +438,7 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function()? integrationRequired,
+    TResult Function()? verificationRequired,
     TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -434,6 +458,8 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
         notAuthenticated,
     required TResult Function(_AuthStateIntegrationRequired value)
         integrationRequired,
+    required TResult Function(_AuthStateVerificationRequired value)
+        verificationRequired,
     required TResult Function(_AuthStateRegistrationRequired value)
         registrationRequired,
     required TResult Function(_AuthStateError value) error,
@@ -448,6 +474,8 @@ class _$_AuthStateNotAuthenticated implements _AuthStateNotAuthenticated {
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
     TResult Function(_AuthStateIntegrationRequired value)? integrationRequired,
+    TResult Function(_AuthStateVerificationRequired value)?
+        verificationRequired,
     TResult Function(_AuthStateRegistrationRequired value)?
         registrationRequired,
     TResult Function(_AuthStateError value)? error,
@@ -511,6 +539,7 @@ class _$_AuthStateIntegrationRequired implements _AuthStateIntegrationRequired {
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function() integrationRequired,
+    required TResult Function() verificationRequired,
     required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
@@ -524,6 +553,7 @@ class _$_AuthStateIntegrationRequired implements _AuthStateIntegrationRequired {
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function()? integrationRequired,
+    TResult Function()? verificationRequired,
     TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -543,6 +573,8 @@ class _$_AuthStateIntegrationRequired implements _AuthStateIntegrationRequired {
         notAuthenticated,
     required TResult Function(_AuthStateIntegrationRequired value)
         integrationRequired,
+    required TResult Function(_AuthStateVerificationRequired value)
+        verificationRequired,
     required TResult Function(_AuthStateRegistrationRequired value)
         registrationRequired,
     required TResult Function(_AuthStateError value) error,
@@ -557,6 +589,8 @@ class _$_AuthStateIntegrationRequired implements _AuthStateIntegrationRequired {
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
     TResult Function(_AuthStateIntegrationRequired value)? integrationRequired,
+    TResult Function(_AuthStateVerificationRequired value)?
+        verificationRequired,
     TResult Function(_AuthStateRegistrationRequired value)?
         registrationRequired,
     TResult Function(_AuthStateError value)? error,
@@ -572,6 +606,123 @@ class _$_AuthStateIntegrationRequired implements _AuthStateIntegrationRequired {
 abstract class _AuthStateIntegrationRequired implements AuthState {
   const factory _AuthStateIntegrationRequired() =
       _$_AuthStateIntegrationRequired;
+}
+
+/// @nodoc
+abstract class _$AuthStateVerificationRequiredCopyWith<$Res> {
+  factory _$AuthStateVerificationRequiredCopyWith(
+          _AuthStateVerificationRequired value,
+          $Res Function(_AuthStateVerificationRequired) then) =
+      __$AuthStateVerificationRequiredCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$AuthStateVerificationRequiredCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res>
+    implements _$AuthStateVerificationRequiredCopyWith<$Res> {
+  __$AuthStateVerificationRequiredCopyWithImpl(
+      _AuthStateVerificationRequired _value,
+      $Res Function(_AuthStateVerificationRequired) _then)
+      : super(_value, (v) => _then(v as _AuthStateVerificationRequired));
+
+  @override
+  _AuthStateVerificationRequired get _value =>
+      super._value as _AuthStateVerificationRequired;
+}
+
+/// @nodoc
+
+class _$_AuthStateVerificationRequired
+    implements _AuthStateVerificationRequired {
+  const _$_AuthStateVerificationRequired();
+
+  @override
+  String toString() {
+    return 'AuthState.verificationRequired()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _AuthStateVerificationRequired);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String token) authenticated,
+    required TResult Function() notAuthenticated,
+    required TResult Function() integrationRequired,
+    required TResult Function() verificationRequired,
+    required TResult Function() registrationRequired,
+    required TResult Function(String? error) error,
+  }) {
+    return verificationRequired();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String token)? authenticated,
+    TResult Function()? notAuthenticated,
+    TResult Function()? integrationRequired,
+    TResult Function()? verificationRequired,
+    TResult Function()? registrationRequired,
+    TResult Function(String? error)? error,
+    required TResult orElse(),
+  }) {
+    if (verificationRequired != null) {
+      return verificationRequired();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthStateLoading value) loading,
+    required TResult Function(_AuthStateAuthenticated value) authenticated,
+    required TResult Function(_AuthStateNotAuthenticated value)
+        notAuthenticated,
+    required TResult Function(_AuthStateIntegrationRequired value)
+        integrationRequired,
+    required TResult Function(_AuthStateVerificationRequired value)
+        verificationRequired,
+    required TResult Function(_AuthStateRegistrationRequired value)
+        registrationRequired,
+    required TResult Function(_AuthStateError value) error,
+  }) {
+    return verificationRequired(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthStateLoading value)? loading,
+    TResult Function(_AuthStateAuthenticated value)? authenticated,
+    TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
+    TResult Function(_AuthStateIntegrationRequired value)? integrationRequired,
+    TResult Function(_AuthStateVerificationRequired value)?
+        verificationRequired,
+    TResult Function(_AuthStateRegistrationRequired value)?
+        registrationRequired,
+    TResult Function(_AuthStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (verificationRequired != null) {
+      return verificationRequired(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthStateVerificationRequired implements AuthState {
+  const factory _AuthStateVerificationRequired() =
+      _$_AuthStateVerificationRequired;
 }
 
 /// @nodoc
@@ -622,6 +773,7 @@ class _$_AuthStateRegistrationRequired
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function() integrationRequired,
+    required TResult Function() verificationRequired,
     required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
@@ -635,6 +787,7 @@ class _$_AuthStateRegistrationRequired
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function()? integrationRequired,
+    TResult Function()? verificationRequired,
     TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -654,6 +807,8 @@ class _$_AuthStateRegistrationRequired
         notAuthenticated,
     required TResult Function(_AuthStateIntegrationRequired value)
         integrationRequired,
+    required TResult Function(_AuthStateVerificationRequired value)
+        verificationRequired,
     required TResult Function(_AuthStateRegistrationRequired value)
         registrationRequired,
     required TResult Function(_AuthStateError value) error,
@@ -668,6 +823,8 @@ class _$_AuthStateRegistrationRequired
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
     TResult Function(_AuthStateIntegrationRequired value)? integrationRequired,
+    TResult Function(_AuthStateVerificationRequired value)?
+        verificationRequired,
     TResult Function(_AuthStateRegistrationRequired value)?
         registrationRequired,
     TResult Function(_AuthStateError value)? error,
@@ -753,6 +910,7 @@ class _$_AuthStateError implements _AuthStateError {
     required TResult Function(String token) authenticated,
     required TResult Function() notAuthenticated,
     required TResult Function() integrationRequired,
+    required TResult Function() verificationRequired,
     required TResult Function() registrationRequired,
     required TResult Function(String? error) error,
   }) {
@@ -766,6 +924,7 @@ class _$_AuthStateError implements _AuthStateError {
     TResult Function(String token)? authenticated,
     TResult Function()? notAuthenticated,
     TResult Function()? integrationRequired,
+    TResult Function()? verificationRequired,
     TResult Function()? registrationRequired,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -785,6 +944,8 @@ class _$_AuthStateError implements _AuthStateError {
         notAuthenticated,
     required TResult Function(_AuthStateIntegrationRequired value)
         integrationRequired,
+    required TResult Function(_AuthStateVerificationRequired value)
+        verificationRequired,
     required TResult Function(_AuthStateRegistrationRequired value)
         registrationRequired,
     required TResult Function(_AuthStateError value) error,
@@ -799,6 +960,8 @@ class _$_AuthStateError implements _AuthStateError {
     TResult Function(_AuthStateAuthenticated value)? authenticated,
     TResult Function(_AuthStateNotAuthenticated value)? notAuthenticated,
     TResult Function(_AuthStateIntegrationRequired value)? integrationRequired,
+    TResult Function(_AuthStateVerificationRequired value)?
+        verificationRequired,
     TResult Function(_AuthStateRegistrationRequired value)?
         registrationRequired,
     TResult Function(_AuthStateError value)? error,
