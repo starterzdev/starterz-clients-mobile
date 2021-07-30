@@ -72,7 +72,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       state = AuthState.loading();
       final OAuthToken token = await AccessTokenStore.instance.fromStore();
-      var response = await _dio.post(
+      await _dio.post(
         'auth/integrate',
         data: IntegrateRequest(
           email: email,
@@ -80,8 +80,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
           oAuthToken: token.accessToken!,
         ).toJson(),
       );
-      final AuthResponse authResponse = AuthResponse.fromJson(response.data);
-      state = AuthState.authenticated(authResponse.token);
+      state = AuthState.verificationRequired();
     } on DioError catch (e) {
       if (e.response?.statusCode == HttpStatus.notFound) {
         state = AuthState.registrationRequired();

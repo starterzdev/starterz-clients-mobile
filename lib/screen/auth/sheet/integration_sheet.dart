@@ -46,6 +46,41 @@ class IntegrationSheet extends ConsumerWidget {
           ],
         );
       },
+      verificationRequired: () {
+        return Wrap(
+          children: [
+            Container(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 30, 20, 40),
+                child: Column(
+                  children: [
+                    Text("이메일을 확인해주세요..."),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          ref
+                              .read(authProvider.notifier)
+                              .cancelAuthenticating();
+                          Navigator.of(context).pop();
+                        },
+                        style: ButtonStyle(),
+                        child: Text(
+                          '닫기',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
       registrationRequired: () {
         return Wrap(
           children: [
