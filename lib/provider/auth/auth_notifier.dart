@@ -23,6 +23,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       print("Verifying Kakao access token... ${token.accessToken}");
       await _authenticateBackend(token.accessToken!);
     } catch (e) {
+      print('no store');
       state = AuthState.notAuthenticated();
     }
   }
@@ -58,7 +59,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   Future<void> _authenticateBackend(String accessToken) async {
     var response = await _dio.post(
-      'auth',
+      'v1/auth',
       data: AuthRequest(
         authType: AuthType.KAKAO,
         oAuthToken: accessToken,
@@ -73,7 +74,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = AuthState.loading();
       final OAuthToken token = await AccessTokenStore.instance.fromStore();
       await _dio.post(
-        'auth/integrate',
+        'v1/auth/integrate',
         data: IntegrateRequest(
           email: email,
           authType: AuthType.KAKAO,

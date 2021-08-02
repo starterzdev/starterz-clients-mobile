@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class BackendClientProvider {
-  static const BASE_URL = "http://192.168.2.16:8080/api/v1/";
+  static const BASE_URL = "http://192.168.2.16:8080/api/";
 
   static Dio generateDefaultDio() {
     return Dio(BaseOptions(
