@@ -14,7 +14,8 @@ class RecruitingDashboard extends ConsumerWidget {
           children: [
             Text('Recruiting'),
             TextButton(
-                onPressed: () => ref.read(backendClientProvider).get('users'),
+                onPressed: () =>
+                    ref.read(backendClientProvider).get('v1/users'),
                 child: Text('Fetch Users'))
           ],
         ),
