@@ -65,7 +65,7 @@ class IntegrationSheet extends ConsumerWidget {
                         onPressed: () {
                           ref
                               .read(authProvider.notifier)
-                              .cancelAuthenticating();
+                              .invalidateAuthentication();
                           Navigator.of(context).pop();
                         },
                         style: ButtonStyle(),
@@ -100,7 +100,7 @@ class IntegrationSheet extends ConsumerWidget {
                         onPressed: () {
                           ref
                               .read(authProvider.notifier)
-                              .cancelAuthenticating();
+                              .invalidateAuthentication();
                           Navigator.of(context).pop();
                         },
                         style: ButtonStyle(),

@@ -20,7 +20,7 @@ final backendClientProvider = Provider<Dio>((ref) {
           orElse: () => handler.next(options));
     }, onError: (e, handler) async {
       if (e.response?.statusCode == 401 &&
-          !e.requestOptions.path.startsWith('api/v1/auth')) {
+          e.requestOptions.path != 'api/v1/auth') {
         dio.lock();
         await ref.read(authProvider.notifier).refreshKakaoToken();
         ref.read(authProvider).maybeWhen(
@@ -37,7 +37,6 @@ final backendClientProvider = Provider<Dio>((ref) {
                 contentType: request.contentType,
               ),
             );
-
             return handler.resolve(response);
           },
           orElse: () {
